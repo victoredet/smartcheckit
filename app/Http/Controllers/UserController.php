@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organizations;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -9,6 +10,12 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    public function dashboard()
+    {
+        $orgs = Organizations::where('owner', Session::get('user')['user_id'])->get();
+        return view('dashboard.index')->with('myOrgs', $orgs);
+    }
+
     public function registerH()
     {
         return view('auth.register');

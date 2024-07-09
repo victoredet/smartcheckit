@@ -21,5 +21,16 @@ Route::get('/create-organization', [OrganizationController::class, 'createOrgani
 
 Route::prefix('organization')->group(function () {
     Route::get('/create', [OrganizationController::class, 'createOrganizationH'])->name('organization.createH');
-    Route::pott('/create', [OrganizationController::class, 'createOrganization'])->name('organization.create');
+    Route::post('/create', [OrganizationController::class, 'createOrganization'])->name('organization.create');
+
+    Route::get('/list', [OrganizationController::class, 'myOrganizations'])->name('organization.myListH');
+    Route::get('/overview/{id}', [OrganizationController::class, 'organization'])->name('organization.overview');
+
+    Route::post('/add-instructor', [OrganizationController::class, 'addInstructorToOrganization'])->name('organization.addInstructor');
+});
+
+
+Route::prefix('dashboard')->group(function () {
+
+    Route::get('/', [UserController::class, 'dashboard'])->name('dashboard.index');
 });
